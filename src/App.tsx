@@ -1,10 +1,11 @@
 import React from "react";
 import // DynamicClassNamePropComponent,
 // DynamicClassNameStateComponent,
-"./components/DynamicClassNameComponent.tsx";
+"./components/Component.tsx";
 // import { WorkingWithText } from "./components/WorkingWithText.tsx";
 // import { Test } from "./components/Test.tsx";
 import styled from "@emotion/styled";
+import { DynamicClassNameStateComponent } from "./components/Component.tsx";
 // import DynamicClassNameComponentImg from "./components/images/DynamicClassNameComponent.png";
 // import DynamicClassNameComponentTestsImg from "./components/images/DynamicClassNameComponent-tests.png";
 // import html from "../coverage/lcov-report/index.html";
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <AppContainer>
       <Header>🩷✨ Unit Testing Party ✨🩷</Header>
+      <DynamicClassNameStateComponent />
       {/* <div dangerouslySetInnerHTML={iframe()} /> */}
       {/* <iframe
         src="../coverage/lcov-report/index.html"
