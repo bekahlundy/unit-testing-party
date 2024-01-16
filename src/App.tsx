@@ -78,13 +78,13 @@ const App = () => {
 //   font-size: 12px;
 // `;
 
-const AppContainer = styled.body`
+const AppContainer = styled.div`
   padding: 40px 0;
   width: 80%;
   margin: auto;
 `;
 
-const Header = styled.body`
+const Header = styled.h1`
   padding: 20px;
   font-size: 22px;
   text-align: center;
