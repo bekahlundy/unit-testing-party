@@ -91,21 +91,37 @@ describe("Component", () => {
     });
   });
   describe("onClick", () => {
-    it("updates dynamic button-text when clicked", () => {
+    it("renders button", () => {
       render(<Component />);
       const button = screen.getByTestId("click-me-button");
 
       expect(button).not.toHaveClass("clicked");
       expect(button).toHaveClass("not-clicked");
       expect(screen.getByText("Click me!")).toBeInTheDocument();
+    });
+
+    it("clicks button", () => {
+      render(<Component />);
+      const button = screen.getByTestId("click-me-button");
 
       fireEvent.click(button);
 
       expect(button).toHaveClass("clicked");
       expect(button).not.toHaveClass("not-clicked");
+    });
+    it("updates dynamic buttonText when clicked", () => {
+      render(<Component />);
+      const button = screen.getByTestId("click-me-button");
+
+      fireEvent.click(button);
+
       expect(
         screen.getByText("🩷 Thanks for Clicking :) 🩷")
       ).toBeInTheDocument();
+
+      fireEvent.click(button);
+
+      expect(screen.getByText("Click me!")).toBeInTheDocument();
     });
   });
 });
