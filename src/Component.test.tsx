@@ -27,15 +27,15 @@ describe("Component", () => {
         render(<Component />);
 
         expect(
-          screen.getByText("Tiramisu tiramisu chocolate bar", { exact: false })
+          screen.getByText("Tiramisu tiramisu chocolate bar", { exact: false }),
         ).toBeInTheDocument(); // substring match
         // or...
         expect(
-          screen.getByText(/Tiramisu tiramisu chocolate bar/)
+          screen.getByText(/Tiramisu tiramisu chocolate bar/),
         ).toBeInTheDocument(); // substring match
         // or...
         expect(
-          screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i)
+          screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i),
         ).toBeInTheDocument(); // substring match, ignore case
       });
 
@@ -128,7 +128,7 @@ describe("Component", () => {
       fireEvent.click(button);
 
       expect(
-        screen.getByText("🩷 Thanks for Clicking :) 🩷")
+        screen.getByText("🩷 Thanks for Clicking :) 🩷"),
       ).toBeInTheDocument();
 
       fireEvent.click(button);
@@ -162,7 +162,7 @@ describe("Component", () => {
       const input = screen.getByTestId("fancy-input");
 
       expect(
-        screen.queryByTestId("input-focused-helper-text")
+        screen.queryByTestId("input-focused-helper-text"),
       ).not.toBeInTheDocument();
 
       input.focus();
@@ -173,7 +173,7 @@ describe("Component", () => {
 
       expect(input).toHaveFocus();
       expect(
-        screen.getByTestId("input-focused-helper-text")
+        screen.getByTestId("input-focused-helper-text"),
       ).toBeInTheDocument();
     });
   });

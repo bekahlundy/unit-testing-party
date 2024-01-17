@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
+import styled from "@emotion/styled/macro";
 import bunnyImage from "./bunny.jpg";
+
 type ComponentProps = {
   isColorful?: boolean;
 };

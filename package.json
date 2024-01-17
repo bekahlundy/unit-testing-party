@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.4",
     "react": "^18.2.0",
     "react-code-blocks": "^0.1.5",
     "react-dom": "^18.2.0",
@@ -19,13 +21,36 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --verbose --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier . --write"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "prettier"
+    ],
+    "rules": {
+      "import/exports-last": "warn",
+      "import/group-exports": "warn",
+      "import/newline-after-import": "warn",
+      "import/no-cycle": "error",
+      "import/no-default-export": "warn",
+      "no-restricted-imports": [
+        "error",
+        {
+          "paths": [
+            {
+              "name": "@emotion/styled",
+              "message": "Please import from @emotion/styled/macro."
+            }
+          ],
+          "patterns": [
+            "!@emotion/styled/macro"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
