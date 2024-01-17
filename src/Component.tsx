@@ -21,10 +21,13 @@ const Component = ({ isColorful }: ComponentProps) => {
         Muffin caramels ice cream chocolate liquorice jelly bonbon brownie
         icing. Cookie powder candy canes cupcake toffee pie pastry marzipan.
       </p>
+      {isFocused && (
+        <div data-testid="input-focused-helper-text">oooooo I am now focused..</div>
+      )}
       <StyledInput
         isFocused={isFocused}
         type="text"
-        id="input"
+        data-testid="fancy-input"
         onFocus={() => setIsFocused(!isFocused)}
         onChange={() => setIsChanged(!isChanged)}
       ></StyledInput>

@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Component } from "./Component";
 
 describe("Component", () => {
-  // describe("", (() => {}));
   describe("setup:", () => {
     describe("renders without errors", () => {
       it("without props passed in", () => {
@@ -93,11 +92,13 @@ describe("Component", () => {
   describe("onClick", () => {
     it("renders button", () => {
       render(<Component />);
+      const buttonText = "Click me!";
       const button = screen.getByTestId("click-me-button");
 
-      expect(button).not.toHaveClass("clicked");
       expect(button).toHaveClass("not-clicked");
-      expect(screen.getByText("Click me!")).toBeInTheDocument();
+      expect(button).not.toHaveClass("clicked");
+      expect(screen.getByText(buttonText)).toBeInTheDocument();
+      expect((button as HTMLButtonElement).type).toBe("submit");
     });
 
     it("clicks button", () => {
@@ -122,6 +123,69 @@ describe("Component", () => {
       fireEvent.click(button);
 
       expect(screen.getByText("Click me!")).toBeInTheDocument();
+    });
+  });
+
+  describe("onFocus", () => {
+    it("renders input", () => {
+      render(<Component />);
+      const input = screen.getByTestId("fancy-input");
+      expect(input).toBeTruthy();
+      expect((input as HTMLInputElement).type).toBe("text");
+    });
+
+    it("focuses on input", () => {
+      render(<Component />);
+      const input = screen.getByTestId("fancy-input");
+
+      input.focus();
+
+      fireEvent.change(input, {
+        target: { value: "hi" },
+      });
+
+      expect(input).toHaveFocus();
+    });
+    it("renders helper text when input is focused", () => {
+      render(<Component />);
+      const input = screen.getByTestId("fancy-input");
+
+      expect(
+        screen.queryByTestId("input-focused-helper-text")
+      ).not.toBeInTheDocument();
+
+      input.focus();
+
+      fireEvent.change(input, {
+        target: { value: "hi" },
+      });
+
+      expect(input).toHaveFocus();
+      expect(
+        screen.getByTestId("input-focused-helper-text")
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("onChange", () => {
+    it("renders input", () => {
+      render(<Component />);
+      const input = screen.getByTestId("fancy-input") as HTMLInputElement;
+      expect(input).toBeTruthy();
+      expect((input as HTMLInputElement).type).toBe("text");
+    });
+
+    it("changes input value", () => {
+      render(<Component />);
+      const input = screen.getByTestId("fancy-input") as HTMLInputElement;
+
+      input.focus();
+
+      fireEvent.change(input, {
+        target: { value: "hi" },
+      });
+
+      expect(input.value).toBe("hi");
     });
   });
 });
