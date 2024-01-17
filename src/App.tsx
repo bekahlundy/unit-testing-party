@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Component } from "./Component.tsx";
 
 const App = () => {
   return (
     <AppContainer>
       <Header>🩷✨ Unit Testing Party ✨🩷</Header>
+      <Component />
     </AppContainer>
   );
 };

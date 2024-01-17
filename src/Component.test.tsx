@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Component } from "./Component";
+import bunnyImage from "./bunny.jpg";
 
 describe("Component", () => {
   describe("setup:", () => {
@@ -36,6 +37,16 @@ describe("Component", () => {
         expect(
           screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i)
         ).toBeInTheDocument(); // substring match, ignore case
+      });
+
+      it("renders an image", () => {
+        render(<Component />);
+        const image = screen.getByAltText("happy-bunny-cartoon-hello-img");
+        expect(image).toHaveAttribute("src", bunnyImage);
+      });
+      it("renders an iframe", () => {
+        render(<Component />);
+        expect(screen.getByTitle("fun-map-iframe")).toBeInTheDocument();
       });
     });
   });
