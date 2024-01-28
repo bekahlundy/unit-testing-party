@@ -5,11 +5,11 @@ import bunnyImage from "./bunny.jpg";
 
 describe("Component", () => {
   describe("setup:", () => {
-    describe("renders without errors", () => {
-      it("without props passed in", () => {
+    describe("renders component", () => {
+      it("renders without props passed in", () => {
         render(<Component />);
       });
-      it("with props passed in", () => {
+      it("renders with props passed in", () => {
         render(<Component isColorful />);
       });
     });
@@ -37,6 +37,12 @@ describe("Component", () => {
         expect(
           screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i),
         ).toBeInTheDocument(); // substring match, ignore case
+      });
+      it("renders an button", () => {
+        render(<Component />);
+        const button = screen.getByTestId("click-me-button");
+
+        fireEvent.click(button);
       });
 
       it("renders an image", () => {
