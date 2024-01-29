@@ -27,22 +27,40 @@ describe("Component", () => {
         render(<Component />);
 
         expect(
-          screen.getByText("Tiramisu tiramisu chocolate bar", { exact: false }),
+          screen.getByText("Tiramisu tiramisu chocolate bar", { exact: false })
         ).toBeInTheDocument(); // substring match
         // or...
         expect(
-          screen.getByText(/Tiramisu tiramisu chocolate bar/),
+          screen.getByText(/Tiramisu tiramisu chocolate bar/)
         ).toBeInTheDocument(); // substring match
         // or...
         expect(
-          screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i),
+          screen.getByText(/TIRAMISU TIRAMISU CHOCOLATE BAR/i)
         ).toBeInTheDocument(); // substring match, ignore case
       });
-      it("renders an button", () => {
-        render(<Component />);
-        const button = screen.getByTestId("click-me-button");
-
-        fireEvent.click(button);
+      describe("renders a button", () => {
+        it("selects button by test-id", () => {
+          render(<Component />);
+          const button = screen.getByTestId("click-me-button");
+          expect(button).toBeInTheDocument();
+        });
+        it("selects button by role and name", () => {
+          render(<Component />);
+          const button = screen.getByRole("button", {
+            name: /Click me!/i,
+          });
+          expect(button).toBeInTheDocument();
+        });
+        it("checks the button is not disabled", () => {
+          render(<Component />);
+          const button = screen.getByTestId("click-me-button");
+          expect(button).not.toBeDisabled();
+        });
+        it("clicks the button", () => {
+          render(<Component />);
+          const button = screen.getByTestId("click-me-button");
+          fireEvent.click(button);
+        });
       });
 
       it("renders an image", () => {
@@ -134,7 +152,7 @@ describe("Component", () => {
       fireEvent.click(button);
 
       expect(
-        screen.getByText("🩷 Thanks for Clicking :) 🩷"),
+        screen.getByText("🩷 Thanks for Clicking :) 🩷")
       ).toBeInTheDocument();
 
       fireEvent.click(button);
@@ -168,7 +186,7 @@ describe("Component", () => {
       const input = screen.getByTestId("fancy-input");
 
       expect(
-        screen.queryByTestId("input-focused-helper-text"),
+        screen.queryByTestId("input-focused-helper-text")
       ).not.toBeInTheDocument();
 
       input.focus();
@@ -179,7 +197,7 @@ describe("Component", () => {
 
       expect(input).toHaveFocus();
       expect(
-        screen.getByTestId("input-focused-helper-text"),
+        screen.getByTestId("input-focused-helper-text")
       ).toBeInTheDocument();
     });
   });
